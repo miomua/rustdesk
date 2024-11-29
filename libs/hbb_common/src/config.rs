@@ -75,7 +75,7 @@ lazy_static::lazy_static! {
         map.insert("password".to_string(), "xdj123!@#".to_string());
         RwLock::new(map)
     };
- 
+}
 lazy_static::lazy_static! {
     pub static ref APP_DIR: RwLock<String> = Default::default();
 }
