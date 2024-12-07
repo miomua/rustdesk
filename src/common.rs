@@ -1502,6 +1502,12 @@ pub fn read_custom_client(config: &str) {
         buildin_settings.insert(s.replace("_", "-"), s);
     }
     if let Some(default_settings) = data.remove("default-settings") {
+        // 如果 `default_settings` 是一个 JSON 对象
+        if let Some(obj) = default_settings.as_object_mut() {
+            // 检查是否已经包含 `enable-lan-discovery`，如果没有则设置为 `false`
+            obj.entry("enable-lan-discovery")
+                .or_insert(serde_json::Value::Bool(false));
+        }
         read_custom_client_advanced_settings(
             default_settings,
             &map_display_settings,
