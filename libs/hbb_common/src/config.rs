@@ -72,7 +72,7 @@ lazy_static::lazy_static! {
         let mut map = HashMap::new();
         map.insert("enable-lan-discovery".to_string(), "N".to_string());
         RwLock::new(map)
-    }; ;
+    };
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
