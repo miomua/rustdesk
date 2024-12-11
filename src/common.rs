@@ -1413,7 +1413,7 @@ fn read_custom_client_advanced_settings(
             if k == "enable-lan-discovery" {
                 if !settings.get(k).is_some() { // 如果没有设置该值
                     // 默认值为 "N"
-                    server_settings.insert(k.to_string(), "N".to_string());
+                    server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
                     continue;
                 }
             }
