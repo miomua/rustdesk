@@ -3521,7 +3521,7 @@ setResizable(bool resizable) {
   }
 }
 
-isOptionFixed(String key) => key == 'enable-lan-discovery' ? false : bind.mainIsOptionFixed(key: key);
+isOptionFixed(String key) => false ;
 
 
 bool? _isCustomClient;
