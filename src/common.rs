@@ -1408,23 +1408,7 @@ fn read_custom_client_advanced_settings(
     let mut buildin_settings = config::BUILTIN_SETTINGS.write().unwrap();
 
     if let Some(settings) = settings.as_object() {
-        for (k, v) in settings {
-            // 如果是 enable-lan-discovery，确保它的默认值是 "N"
-            if k == "OPTION-ENABLE-LAN-DISCOVERY" {
-                let mut vvalue = v.as_str().unwrap_or(""); 
-                if vvalue != "Y" { // 如果没有设置该值
-                    // 默认值为 "N"
-                    server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
-                    server_settings.insert("option-enable-lan-discovery".to_string(), "N".to_string());
-                    server_settings.insert("enable_lan_discovery".to_string(), "N".to_string());
-                    server_settings.insert("option_enable_lan-discovery".to_string(), "N".to_string());
-                    server_settings.insert("ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
-                    server_settings.insert("OPTION_ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
-                    server_settings.insert("ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
-                    server_settings.insert("OPTION-ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
-                    continue;
-                }
-            }
+        for (k, v) in settings { 
             let Some(v) = v.as_str() else {
                 continue;
             };
@@ -1455,6 +1439,18 @@ fn read_custom_client_advanced_settings(
             }
         }
     }
+    // 在这里判断，如果 settings 中没有 "OPTION-ENABLE-LAN-DISCOVERY" 这个键，插入默认值
+    //if !settings.contains_key("OPTION-ENABLE-LAN-DISCOVERY") { 
+     
+        server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
+        server_settings.insert("option-enable-lan-discovery".to_string(), "N".to_string());
+        server_settings.insert("enable_lan_discovery".to_string(), "N".to_string());
+        server_settings.insert("option_enable_lan-discovery".to_string(), "N".to_string());
+        server_settings.insert("ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
+        server_settings.insert("OPTION_ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
+        server_settings.insert("ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
+        server_settings.insert("OPTION-ENABLE-LAN-DISCOVERY".to_string(), "N".to_string()); 
+  // }      
 }
 
 #[inline]
