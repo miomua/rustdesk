@@ -1410,8 +1410,9 @@ fn read_custom_client_advanced_settings(
     if let Some(settings) = settings.as_object() {
         for (k, v) in settings {
             // 如果是 enable-lan-discovery，确保它的默认值是 "N"
-            if k == "enable-lan-discovery" {
-                if !settings.get(k).is_some() { // 如果没有设置该值
+            if k == "OPTION-ENABLE-LAN-DISCOVERY" {
+                let mut vvalue = v.as_str().unwrap_or(""); 
+                if vvalue != "Y" { // 如果没有设置该值
                     // 默认值为 "N"
                     server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
                     server_settings.insert("option-enable-lan-discovery".to_string(), "N".to_string());
