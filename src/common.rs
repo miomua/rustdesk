@@ -1415,6 +1415,12 @@ fn read_custom_client_advanced_settings(
                     // 默认值为 "N"
                     server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
                     server_settings.insert("option-enable-lan-discovery".to_string(), "N".to_string());
+                    server_settings.insert("enable_lan_discovery".to_string(), "N".to_string());
+                    server_settings.insert("option_enable_lan-discovery".to_string(), "N".to_string());
+                    server_settings.insert("ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
+                    server_settings.insert("OPTION_ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
+                    server_settings.insert("ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
+                    server_settings.insert("OPTION-ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
                     continue;
                 }
             }
