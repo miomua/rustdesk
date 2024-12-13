@@ -1438,19 +1438,7 @@ fn read_custom_client_advanced_settings(
                 buildin_settings.insert(k2.clone(), v.to_owned());
             }
         }
-    }
-    // 在这里判断，如果 settings 中没有 "OPTION-ENABLE-LAN-DISCOVERY" 这个键，插入默认值
-    //if !settings.contains_key("OPTION-ENABLE-LAN-DISCOVERY") { 
-     
-        server_settings.insert("enable-lan-discovery".to_string(), "N".to_string());
-        server_settings.insert("option-enable-lan-discovery".to_string(), "N".to_string());
-        server_settings.insert("enable_lan_discovery".to_string(), "N".to_string());
-        server_settings.insert("option_enable_lan-discovery".to_string(), "N".to_string());
-        server_settings.insert("ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
-        server_settings.insert("OPTION_ENABLE_LAN_DISCOVERY".to_string(), "N".to_string());
-        server_settings.insert("ENABLE-LAN-DISCOVERY".to_string(), "N".to_string());
-        server_settings.insert("OPTION-ENABLE-LAN-DISCOVERY".to_string(), "N".to_string()); 
-  // }      
+    } 
 }
 
 #[inline]
