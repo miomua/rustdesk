@@ -64,14 +64,14 @@ lazy_static::lazy_static! {
     static ref KEY_PAIR: Mutex<Option<KeyPair>> = Default::default();
     static ref USER_DEFAULT_CONFIG: RwLock<(UserDefaultConfig, Instant)> = RwLock::new((UserDefaultConfig::load(), Instant::now()));
     pub static ref NEW_STORED_PEER_CONFIG: Mutex<HashSet<String>> = Default::default();
-    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = { 
+    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> =  { 
         let mut map = HashMap::new();
         // 在默认设置中关闭网络发现
         map.insert("enable-lan-discovery".to_string(), "N".to_string());
         map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
         RwLock::new(map)
     }; 
-    pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default(); 
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
@@ -79,6 +79,8 @@ lazy_static::lazy_static! {
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
         map.insert("password".to_string(), "xdj123".to_string());
+        map.insert("enable-lan-discovery".to_string(), "N".to_string());
+        map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
         RwLock::new(map)
     }; 
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
