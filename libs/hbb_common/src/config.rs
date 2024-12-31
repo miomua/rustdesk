@@ -68,13 +68,16 @@ lazy_static::lazy_static! {
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default(); 
-    pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> =  {
+        let mut map = HashMap::new(); 
+        map.insert("enable-lan-discovery".to_string(), "N".to_string());
+        map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
+        RwLock::new(map)
+    }; 
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
         map.insert("password".to_string(), "xdj123".to_string());
-        map.insert("enable-lan-discovery".to_string(), "N".to_string());
-        map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
         RwLock::new(map)
     }; 
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
