@@ -1,3 +1,3 @@
 [submodule "libs/hbb_common"]
-	path = libs/hbb_common
-	url = https://github.com/miomua/hbb_common
+	path = libs/hbb_common 
+	url = https://github.com/miomua/hbb_common/tree/0b7d70e229c8cd129f7ed00ad311743f6b403198
