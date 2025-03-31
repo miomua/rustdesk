@@ -103,7 +103,7 @@ const CHARS: &[char] = &[
 ];
 
 pub const RENDEZVOUS_SERVERS: &[&str] = &["ssx.f3322.net"];
-pub const RS_PUB_KEY: &str = "naG3YkwBMupqM6dMSjIgN46XvbNFYfbuY3xXKTXRAJ4=";
+pub const RS_PUB_KEY: &str = "gduxcfcLnJ2kdY+7JKAwotvgBP32nf4q0CAYT+gr6wc=";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
 pub const RELAY_PORT: i32 = 21117;
