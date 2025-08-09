@@ -1,4 +1,6 @@
+# This yaml shares the build bridge steps with ci and nightly.
 name: Build flutter-rust-bridge
+# 2023-11-23 18:00:00+00:00
 
 on:
   workflow_call:
@@ -7,17 +9,20 @@ env:
   CARGO_EXPAND_VERSION: "1.0.95"
   FLUTTER_VERSION: "3.22.3"
   FLUTTER_RUST_BRIDGE_VERSION: "1.80.1"
-  RUST_VERSION: "1.75.0"
+  RUST_VERSION: "1.75" # https://github.com/rustdesk/rustdesk/discussions/7503
 
 jobs:
   generate_bridge:
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.job.os }} 
     strategy:
       fail-fast: false
       matrix:
-        arch: [x86_64]
-        target: [x86_64-unknown-linux-gnu]
-        os: [ubuntu-20.04]
+        job:
+          - {
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-20.04,
+              extra-build-args: "",
+            }
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -26,9 +31,9 @@ jobs:
 
       - name: Install prerequisites
         run: |
+          sudo apt-get install ca-certificates -y
           sudo apt-get update -y
           sudo apt-get install -y \
-            ca-certificates \
             clang \
             cmake \
             curl \
@@ -47,24 +52,24 @@ jobs:
         uses: dtolnay/rust-toolchain@v1
         with:
           toolchain: ${{ env.RUST_VERSION }}
-          targets: ${{ matrix.target }}
-          components: rustfmt
+          targets: ${{ matrix.job.target }}
+          components: "rustfmt"
 
       - uses: Swatinem/rust-cache@v2
         with:
-          prefix-key: bridge-${{ matrix.os }}
+          prefix-key: bridge-${{ matrix.job.os }}
 
       - name: Cache Bridge
         id: cache-bridge
         uses: actions/cache@v3
         with:
           path: /tmp/flutter_rust_bridge
-          key: bridge-${{ matrix.arch }}
+          key: vcpkg-${{ matrix.job.arch }}
 
       - name: Install flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
+          channel: "stable"
           flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
@@ -81,7 +86,7 @@ jobs:
           cp ./flutter/macos/Runner/bridge_generated.h ./flutter/ios/Runner/bridge_generated.h
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@master
         with:
           name: bridge-artifact
           path: |
